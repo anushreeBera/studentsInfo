@@ -1,0 +1,24 @@
+/*
+Creation date: 16-6-2017
+Purpose:  adding custom styling to the HTML page registration_form.html created in Bootstrap
+File Path: /studentsInfo-Bootstrap/assets/custom/css/customize_bootstrap.css
+Created By : Anushree.
+*/
+input[type=button]:disabled {
+    background:#dddddd;
+}
+body{
+	background-image:url("/studentsInfo-Bootstrap/assets/custom/image/background_registration.jpg");
+}
+.container{
+	background-color:#9933ff;
+
+}
+header, footer{
+	margin-bottom:15px;
+}
+caption{
+	font-weight:bold;
+	font-size-adjust:0.75;
+	color:black;
+}
