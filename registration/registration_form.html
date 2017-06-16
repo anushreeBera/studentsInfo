@@ -2,18 +2,16 @@
 <html lang="en">
   <head>
 		<!--
-		Creation date: 6-6-2017
+		Creation date: 15-6-2017
 		Purpose:  A student registration form to register students
-		File Path: D:/Projects/studentDemo/registration/student_registration_form.htm
+		File Path: /studentsInfo/registration/student_registration_form.html
 		Created By : Anushree.
 		-->
 	<title>Registration Form</title>
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="D:/Projects/studentsInfo/assets/vendor/bootstrap-3.3.7-dist/css/bootstrap.min.css">
-	<script src="D:/Projects/studentsInfo/assets/vendor/jquery/jquery-3.2.1.js"></script>
-	<script src="D:/Projects/studentsInfo/assets/vendor/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="/studentsInfo-Bootstrap/assets/vendor/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 	</head>
   <body>
 	<!-- Form Name -->
@@ -50,28 +48,7 @@
 							<input type="date" id="dob" placeholder="Date Of Birth" class="form-control">
 						</div>
 					</div>
-					<!-- Text input Gender-->
-					<div class="form-group">
-						<div class="col-sm-4">
-							<label for="gender">Gender</label>
-							<select id="gender" placeholder="Gender" class="form-control">
-								<option value="female" selected>Female</option>
-								<option value="male">Male</option>
-							</select>
-						</div>
-					</div>
-					<!-- Text input Caste-->
-					<div class="form-group">
-						<div class="col-sm-4">
-							<label for="caste">Caste</label>
-							<select id="caste" placeholder="Caste" class="form-control custom-select">
-								<option value="general" selected>General</option>
-								<option value="SC">SC</option>
-								<option value="ST">ST</option>
-								<option value="OBC">OBC</option>
-							</select>
-						</div>
-					</div>
+					<!-- Text input Email-->
 					<div class="form-group">
 						<div class="col-sm-6">
 							<label for="email">E-mail ID</label>
@@ -79,65 +56,7 @@
 						</div>
 					</div>
 				</fieldset>
-				
-				<fieldset>
-					<!--Address Section-->
-					<legend>Communication Details</legend>
-					<p>Please enter your address here</p>
 					
-					<!-- Text input-->
-					<div class="form-group">
-						<div class="col-sm-10">
-							<input type="text" id="addressLine1" placeholder="Address Line 1" class="form-control">
-						</div>
-					</div>
-					<!-- Text input-->
-					<div class="form-group">
-						<div class="col-sm-10">
-							<input type="text" id="addressLine2" placeholder="Address Line 2" class="form-control">
-						</div>
-					</div>
-					<!-- Text input-->
-					<div class="form-group">
-						<div class="col-sm-4">
-							<input type="text" id="city" placeholder="City" class="form-control">
-						</div>
-						<div class="col-sm-2">
-							<input type="text" id="state" placeholder="State" class="form-control">
-						</div>
-						<div class="col-sm-4">
-							<input type="text" id="postalCode" placeholder="Post Code" class="form-control">
-						</div>
-					</div>
-				</fieldset>
-				
-				<fieldset>
-					<!--Parents/Guardians Contact Section-->
-					<legend>Parent/Guardians Contact Information</legend>
-					<p>Please enter your parent / guardians details here</p>
-					
-					<!-- Text input-->
-					<div class="form-group">
-						<div class="col-sm-4">
-							<input type="text" id="pFistName" placeholder="First Name" class="form-control">
-						</div>
-						<div class="col-sm-2">
-							<input type="text" id="pMiddleName" placeholder="Middle Name" class="form-control">
-						</div>
-						<div class="col-sm-4">
-							<input type="text" id="pLastName" placeholder="Last Name" class="form-control">
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="col-sm-4">
-							<input type="text" placeholder="Phone Number" class="form-control">
-						</div>
-						<div class="col-sm-6">
-							<input type="email" name="pEmail" placeholder="Email" class="form-control">
-						</div>
-					</div>
-				</fieldset>
-				
 				<fieldset>
 					<!--Create Account Section-->
 					<legend>Create Account</legend>
@@ -181,6 +100,7 @@
 			</form>
 		</div><!--/.col-md-8-->
 	</div><!--/.row-->
-	
+	<script src="/studentsInfo-Bootstrap/assets/vendor/jquery/jquery-3.2.1.js"></script>
+	<script src="/studentsInfo-Bootstrap/assets/vendor/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
   </body>
 </html>
