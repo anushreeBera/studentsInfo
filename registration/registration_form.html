@@ -9,97 +9,120 @@
 		-->
 	<title>Registration Form</title>
     <meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="/studentsInfo-Bootstrap/assets/vendor/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 	</head>
   <body>
 	<!-- Form Name -->
-	<div class="jumbotron">
-		<h1>Registration Form <sub><sub><i>( using Bootstrap )</i></sub></sub></h1>
-	</div>
-	
-	<div class="row">
-		<div class="col-md-8 col-md-offset-1">
-			<form class="form-horizontal" role="form">
-				<fieldset>
-					<!-- Name Section-->
-					<legend>Personal Information Details</legend>
+	<header class="container">
+       <h2>Registration Form</h2>
+    </header>
+	<section class="container">
+		<div class="row">
+			<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+				<form class="form-horizontal" role="form">
+					<fieldset>
+						<!-- Name Section-->
+						<legend>Personal Information Details</legend>
 
-					<!-- Text input Name-->
+						<!-- Text input Name-->
+						<div class="form-group">
+							<div class="col-sm-3">
+								<label for="firstName">First name</label>
+								<input type="text" id="firstName" placeholder="First Name" class="form-control">
+							</div>
+							<div class="col-sm-3">
+								<label for="middleName">Middle name</label>
+								<input type="text" id="middleName" placeholder="Middle Name" class="form-control">
+							</div>
+							<div class="col-sm-3">
+								<label for="lastName">Last name</label>
+								<input type="text" id="lastName" placeholder="Last Name" class="form-control">
+							</div>
+						</div>
+						<!-- Text input Date-->
+						<div class="form-group">
+							<div class="col-sm-4">
+								<label for="dob">Date Of Birth</label>
+								<input type="date" id="dob" placeholder="Date Of Birth" class="form-control">
+							</div>
+						</div>
+						<!-- Text input Email-->
+						<div class="form-group">
+							<div class="col-sm-6">
+								<label for="email">E-mail ID</label>
+								<input type="email" id="email" placeholder="Email" class="form-control">
+							</div>
+						</div>
+					</fieldset>
+						
+					<fieldset>
+						<!--Create Account Section-->
+						<legend>Create Account</legend>
+						<p>Please enter a username and password for your account</p>
+						
+						<!-- Text input-->
+						<div class="form-group">
+							<div class="col-sm-4">
+								<label for="username">Username</label>
+								<input type="text" id="username" placeholder="Username" class="form-control">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-4">
+								<label for="password1">Password</label>
+								<input type="text" id="password1" placeholder="Password" class="form-control">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-4">
+								<label for="password2">Confirm Password</label>
+								<input type="text" id="password2" placeholder="Confirm Password" class="form-control">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-2">
+								<label for="iAgree">I Agree</label>
+								<input type="checkbox" id="iAgree">
+							</div>
+						</div>
+					</fieldset>
+					<!-- Command  buttons-->
 					<div class="form-group">
-						<div class="col-sm-4">
-							<label for="firstName">First name</label>
-							<input type="text" id="firstName" placeholder="First Name" class="form-control">
-						</div>
-						<div class="col-sm-2">
-							<label for="middleName">Middle name</label>
-							<input type="text" id="middleName" placeholder="Middle Name" class="form-control">
-						</div>
-						<div class="col-sm-4">
-							<label for="lastName">Last name</label>
-							<input type="text" id="lastName" placeholder="Last Name" class="form-control">
+						<div class="col-sm-5 col-sm-offset-1">
+							<div class="pull-right">
+								<input type="reset" class="btn btn-default"></input>
+								<input type="button" class="btn btn-primary" value="Submit"></input>
+							</div>
 						</div>
 					</div>
-					<!-- Text input Date-->
-					<div class="form-group">
-						<div class="col-sm-4">
-							<label for="dob">Date Of Birth</label>
-							<input type="date" id="dob" placeholder="Date Of Birth" class="form-control">
-						</div>
-					</div>
-					<!-- Text input Email-->
-					<div class="form-group">
-						<div class="col-sm-6">
-							<label for="email">E-mail ID</label>
-							<input type="email" id="email" placeholder="Email" class="form-control">
-						</div>
-					</div>
-				</fieldset>
+				</form>
+			</div><!--/.col-md-8-->
+		</div><!--/.row-->
+		<div class="table-responsive">
+			<table class="table table-striped table-condensed table-hover">
+				<caption>Registered Users</caption>
+				<thead>
+					<tr>
+						<th>Username</th>
+						<th>Firstname</th>
+						<th>Lastname</th>
+						<th>Date of Birth</th>
+						<th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+						<th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody>
 					
-				<fieldset>
-					<!--Create Account Section-->
-					<legend>Create Account</legend>
-					<p>Please enter a username and password for your account</p>
-					
-					<!-- Text input-->
-					<div class="form-group">
-						<div class="col-sm-4">
-							<label for="username">Username</label>
-							<input type="text" id="username" placeholder="Username" class="form-control">
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="col-sm-4">
-							<label for="password1">Password</label>
-							<input type="text" id="password1" placeholder="Password" class="form-control">
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="col-sm-4">
-							<label for="password2">Confirm Password</label>
-							<input type="text" id="password2" placeholder="Confirm Password" class="form-control">
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="col-sm-2">
-							<label for="iAgree">I Agree</label>
-							<input type="checkbox" id="iAgree">
-						</div>
-					</div>
-				</fieldset>
-				<!-- Command  buttons-->
-				<div class="form-group">
-					<div class="col-sm-5 col-sm-offset-1">
-						<div class="pull-right">
-							<input type="reset" class="btn btn-default"></input>
-							<input type="button" class="btn btn-primary" value="Submit"></input>
-						</div>
-					</div>
-				</div>
-			</form>
-		</div><!--/.col-md-8-->
-	</div><!--/.row-->
+				</tbody>
+			</table>
+		</div>
+	</section>
+	<footer class="container">
+        <h6>designed in <strong>Bootstrap</strong></h6>
+    </footer>
+	<!--Latest jQuery and Bootstrap-->
 	<script src="/studentsInfo-Bootstrap/assets/vendor/jquery/jquery-3.2.1.js"></script>
 	<script src="/studentsInfo-Bootstrap/assets/vendor/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
   </body>
