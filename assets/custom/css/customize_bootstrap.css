@@ -14,11 +14,27 @@ body{
 	background-color:#f5f5ef;
 
 }
-header, footer{
+header{
 	margin-bottom:15px;
+}
+footer{
+	margin-top:15px;
 }
 caption{
 	font-weight:bold;
 	font-size-adjust:0.75;
 	color:black;
+}
+.required label{
+    font-weight:bold;
+}
+.required label:after{
+    color:#e32;
+    content:'*';
+    display:inline;
+}
+span{
+	display:block;
+	margin-bottom:5px;
+	color:red;
 }
