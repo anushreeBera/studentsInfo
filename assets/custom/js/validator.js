@@ -15,10 +15,11 @@ Created By : Anushree.
 		$(function(){
 			$('#iAgree').click(function() {
 				if ($(this).is(':checked')) {
-					$('#submitButton').attr('disabled', 'disabled');
+					$('#submitButton').removeAttr('disabled');
+
 				}
 				else {
-					$('#submitButton').removeAttr('disabled');
+					$('#submitButton').attr('disabled', 'disabled');
 				}
 			});
 		});
