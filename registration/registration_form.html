@@ -17,90 +17,104 @@
 	<link rel="stylesheet" type="text/css" href="/studentsInfo-Bootstrap/assets/custom/css/customize_bootstrap.css">
 	</head>
   <body>
-	<!-- Form Name -->
+	<!--Header section-->
 	<header class="container">
        <h2>Registration Form</h2>
     </header>
+	
 	<section class="container">
 		<div class="row">
-			<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-				<form class="form-horizontal" role="form">
+			<div class="col-xs-12 col-sm-12">
+				<form class="form-horizontal" id="registrationForm" role="form">
 					<fieldset>
 						<!-- Name Section-->
-						<legend>Personal Information Details</legend>
-
-						<!-- Text input Name-->
 						<div class="form-group">
-							<div class="col-sm-3">
-								<label for="firstName">First name</label>
-								<input type="text" id="firstName" placeholder="First Name" class="form-control">
-							</div>
-							<div class="col-sm-3">
-								<label for="middleName">Middle name</label>
-								<input type="text" id="middleName" placeholder="Middle Name" class="form-control">
-							</div>
-							<div class="col-sm-3">
-								<label for="lastName">Last name</label>
-								<input type="text" id="lastName" placeholder="Last Name" class="form-control">
-							</div>
-						</div>
-						<!-- Text input Date-->
-						<div class="form-group">
-							<div class="col-sm-4">
-								<label for="dob">Date Of Birth</label>
-								<input type="date" id="dob" placeholder="Date Of Birth" class="form-control">
-							</div>
-						</div>
-						<!-- Text input Email-->
-						<div class="form-group">
-							<div class="col-sm-6">
-								<label for="email">E-mail ID</label>
-								<input type="email" id="email" placeholder="Email" class="form-control">
-							</div>
-						</div>
-					</fieldset>
 						
-					<fieldset>
+							<!-- First Name-->
+							<div class="col-xs-12 col-sm-4">
+								<label for="firstName" class="control-label">First name</label>
+								<input type="text" name="firstName" placeholder="First Name" class="form-control">
+							</div>
+							
+							<!-- Middle Name-->
+							<div class="col-xs-12 col-sm-4">
+								<label for="middleName" class="control-label">Middle name</label>
+								<input type="text" name="middleName" placeholder="Middle Name" class="form-control">
+							</div>
+							
+							<!-- Last Name-->
+							<div class="col-xs-12 col-sm-4">
+								<label for="lastName" class="control-label">Last name</label>
+								<input type="text" name="lastName" placeholder="Last Name" class="form-control">
+							</div>
+						</div>
+						
+						<!-- Date and e-mail Section-->
+						<div class="form-group">
+						
+							<!-- Date input DOB-->
+							<div class="col-xs-12 col-sm-5">
+								<label for="dob" class="control-label">Date Of Birth</label>
+								<input type="date" name="dob" placeholder="Date Of Birth" class="form-control">
+							</div>
+						
+							<!-- Text input Email-->
+							<div class="col-xs-12 col-sm-7">
+								<label for="email" class="control-label">E-mail ID</label>
+								<input type="email" name="email" placeholder="Email" class="form-control">
+							</div>
+						</div>
+						
 						<!--Create Account Section-->
-						<legend>Create Account</legend>
-						<p>Please enter a username and password for your account</p>
+						<div class="form-group">
+							
+							<!-- Text input Username-->
+							<div class="col-xs-12 col-sm-4">
+								<label for="username" class="control-label">Username</label>
+								<input type="text" name="username" placeholder="Username" class="form-control">
+							</div>
+
+							<!-- Text input password-->
+							<div class="col-xs-12 col-sm-4">
+								<label for="password1" class="control-label">Password</label>
+								<input type="text" name="password1" placeholder="Password" class="form-control">
+							</div>
+
+							<!-- Text input confirm password-->
+							<div class="col-xs-12 col-sm-4">
+								<label for="password2" class="control-label">Confirm Password</label>
+								<input type="text" name="password2" placeholder="Confirm Password" class="form-control">
+							</div>
+						</div>
 						
-						<!-- Text input-->
+						<!-- I agree section-->
 						<div class="form-group">
-							<div class="col-sm-4">
-								<label for="username">Username</label>
-								<input type="text" id="username" placeholder="Username" class="form-control">
+						
+							<!-- Checkbox I agree-->
+							<div class="col-xs-12 col-sm-2">
+								<label for="iAgree" class="control-label">I Agree</label>
+								<input type="checkbox" name="iAgree">
 							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-4">
-								<label for="password1">Password</label>
-								<input type="text" id="password1" placeholder="Password" class="form-control">
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-4">
-								<label for="password2">Confirm Password</label>
-								<input type="text" id="password2" placeholder="Confirm Password" class="form-control">
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-2">
-								<label for="iAgree">I Agree</label>
-								<input type="checkbox" id="iAgree">
+							
+							<!--Error messages would be shown here-->
+							<div class="col-xs-5 col-sm-5 col-sm-offset-3">
+								<div id="messages"></div>
 							</div>
 						</div>
 					</fieldset>
+					
 					<!-- Command  buttons-->
 					<div class="form-group">
-						<div class="col-sm-5 col-sm-offset-1">
+						<div class="col-xs-4 col-sm-5 col-sm-offset-1">
 							<div class="pull-right">
 								<input type="reset" class="btn btn-default"></input>
-								<input type="button" class="btn btn-primary" value="Submit" disabled></input>
+								<input type="button" class="btn btn-primary" id="submitButton" value="Submit" disabled></input>
 							</div>
 						</div>
 					</div>
 				</form>
+				
+				<!--Table section-->
 				<div class="table-responsive">
 					<table class="table table-striped table-condensed table-hover">
 						<caption>Registered Users</caption>
@@ -117,15 +131,18 @@
 						<tbody>
 						
 						</tbody>
-					</table>
+					</table>	
 				</div><!--/.table-responsive-->
+				
 			</div><!--/.col-xs-10 col-sm-10 col-md-10 col-lg-10-->
 		</div><!--/.row-->
-		
 	</section>
+	
+	<!--Footer section-->
 	<footer class="container">
         <h6>designed in <strong>Bootstrap</strong></h6>
     </footer>
+	
 	<!--Latest jQuery and Bootstrap-->
 	<script src="/studentsInfo-Bootstrap/assets/vendor/jquery/jquery-3.2.1.js"></script>
 	<script src="/studentsInfo-Bootstrap/assets/vendor/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
