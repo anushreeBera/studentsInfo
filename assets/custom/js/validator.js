@@ -9,34 +9,26 @@ Created By : Anushree.
 	//ready function
 	$(function(){
 		
-		alert("Hello, student.");
 
 		//to enable/disable submit on check/uncheck of i agree
-		$(function(){
-			$('#iAgree').click(function() {
-				if ($(this).is(':checked')) {
-					$('#submitButton').removeAttr('disabled');
-
-				}
-				else {
-					$('#submitButton').attr('disabled', 'disabled');
-				}
-			});
+		$('#iAgree').click(function() {
+			if ($(this).is(':checked')) {
+				$('#submitButton').removeAttr('disabled');
+			}
+			else {
+				$('#submitButton').attr('disabled', 'disabled');
+			}
 		});
 		
 		//to validate the form on click of submit
-		$(function(){
-			$('#submitButton').click(function(){
-				validateForm();   
-			});
+		$('#submitButton').click(function(){
+			validateForm();   
 		});
 		
 		//to clear error messages and disable submit button on click of reset
-		$(function(){
-			$('#resetButton').click(function(){
-				$("span").html("");
-				$('#submitButton').attr('disabled', 'disabled');
-			});
+		$('#resetButton').click(function(){
+			$("span").html("");
+			$('#submitButton').attr('disabled', 'disabled');
 		});
 		
 		

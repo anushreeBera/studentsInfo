@@ -28,11 +28,11 @@
 				<form class="form-horizontal" id="registrationForm" role="form">
 					<fieldset>
 						<!-- Name Section-->
-						<div class="form-group">
+						<div class="form-group required">
 						
 							<!-- First Name-->
 							<div class="col-xs-12 col-sm-4">
-								<label for="firstName" class="control-label">First name</label>
+								<label for="firstName" id="firstName" class="control-label">First name</label>
 								<input type="text" name="firstName" id="firstName" placeholder="First Name" class="form-control" required>
 							</div>
 							
@@ -44,13 +44,13 @@
 							
 							<!-- Last Name-->
 							<div class="col-xs-12 col-sm-4">
-								<label for="lastName" class="control-label">Last name</label>
+								<label for="lastName" id="lastName" class="control-label">Last name</label>
 								<input type="text" name="lastName" id="lastName" placeholder="Last Name" class="form-control" required>
 							</div>
 						</div>
 						
 						<!-- Date and e-mail Section-->
-						<div class="form-group">
+						<div class="form-group required">
 						
 							<!-- Date input DOB-->
 							<div class="col-xs-12 col-sm-5">
@@ -66,7 +66,7 @@
 						</div>
 						
 						<!--Create Account Section-->
-						<div class="form-group">
+						<div class="form-group required">
 							
 							<!-- Text input Username-->
 							<div class="col-xs-12 col-sm-4">
@@ -88,7 +88,7 @@
 						</div>
 						
 						<!-- I agree section-->
-						<div class="form-group">
+						<div class="form-group required">
 						
 							<!-- Checkbox I agree-->
 							<div class="col-xs-4 col-sm-2">
@@ -104,13 +104,9 @@
 					</fieldset>
 					
 					<!-- Command  buttons-->
-					<div class="form-group">
-						<div class="col-xs-4 col-sm-5 col-sm-offset-1">
-							<div class="pull-right">
-								<input type="reset" class="btn btn-default" id="resetButton"></input>
-								<input type="button" class="btn btn-primary" id="submitButton" value="Submit" disabled></input>
-							</div>
-						</div>
+					<div class="btn-toolbar">
+						<input type="reset" class="btn btn-default" id="resetButton"></input>
+						<input type="button" class="btn btn-primary" id="submitButton" value="Submit" disabled></input>
 					</div>
 				</form>
 				
