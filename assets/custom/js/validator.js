@@ -5,6 +5,7 @@ File Path: /studentsInfo-Bootstrap/assets/custom/js/validator.js
 Created By : Anushree.
 */
 
+
 /**
 * Functionality: this is the wrapper function that wraps all the utility as well as ready function
 * @params: null 
@@ -16,12 +17,13 @@ Created By : Anushree.
 	var table = document.getElementById("studentTable");
 	var usersArray = [];
 	var flag = 0;
+	var data = '{"firstName":"John", "middleName":"", "lastName":"Dox", "dob":"0011-11-11", "email":"john@mfs.com", "username":"johnd1", "password1":"qw", "password2":"qw"}';
 	
 	/**
 	* Functionality: to delete a row from the table
 	* @params: DOM button
 	* @return: null
-	*/
+	*
 	var deleteRow = function(button) {
 		
 		//finding the row index of the button
@@ -33,6 +35,7 @@ Created By : Anushree.
 		//deleting the row entry from the table
 		table.deleteRow(index);
 	};
+	*/
 	
 	
 	
@@ -52,8 +55,8 @@ Created By : Anushree.
 		row.insertCell(1).innerHTML = usersArray[studentsNumber].firstName;
 		row.insertCell(2).innerHTML = usersArray[studentsNumber].lastName;
 		row.insertCell(3).innerHTML = usersArray[studentsNumber].dob;
-		row.insertCell(4).innerHTML = '<input type="button" class="btn btn-warning" id="updateButton" value="Update" onclick="updateEntry(this)">';
-		row.insertCell(5).innerHTML = '<input type="button" class="btn btn-danger" id="deleteButton" value="Delete">';
+		row.insertCell(4).innerHTML = '<input type="button" class="btn btn-warning" name="updateButton" value="Update">';
+		row.insertCell(5).innerHTML = '<input type="button" class="btn btn-danger" name="deleteButton" value="Delete">';
 	};
 	
 	/**
@@ -78,7 +81,6 @@ Created By : Anushree.
 					{
 						//resetting global update flag to false
 						flag = 0;
-					
 						return alert("Updating existing user!");
 					}
 				}
@@ -161,40 +163,48 @@ Created By : Anushree.
 		var inputId = $(object).attr('id');
 		var inputValue = $(object).val();
 		
-		if( inputType === "text" && ((inputId !== "middleName") || (inputId !== "username")) && !alphaReg.test(inputValue) )
+		if( inputType === "text" && ((inputId !== "middleName") && (inputId !== "username")) && !alphaReg.test(inputValue) )
 		{
 			$('#messages').after('<span class="error"> Letters only!</span>');
-			$(this).focus();
+			$(object).focus();
 			return;
 		}
 		else if( inputId === "middleName" && inputValue !== "" && !alphaReg.test(inputValue) )
 		{
 			$('#messages').after('<span class="error"> Letters only!</span>');
-			$(this).focus();
+			$(object).focus();
 			return;
 		}
 		else if( inputId === "username" && !alphaNumericReg.test(inputValue) )
 		{
 			$('#messages').after('<span class="error"> Letters and Numbers only!</span>');
-			$(this).focus();
+			$(object).focus();
 			return;
 		}
 		else if( inputType == "email" && !emailReg.test(inputValue) )
 		{
 			$('#messages').after('<span class="error"> Please enter a valid email address.</span>');
-			$(this).focus();
+			$(object).focus();
 			return;
 		}
 		else if( inputType == "password" && inputId === "password2")
 		{
 			if( $(this).prev().val() === inputValue)
 			{
-				$(this).focus();
 				$('#messages').after('<span class="error"> Password must be same!</span>');
+				$(object).focus();
 				return;
 			}
 		}
 	};
+	
+	
+	var populate = function(frm, data) {
+		$.each(data, function(key, value){
+			$('[name='+key+']', frm).val(value);
+		});
+	};
+	
 	
 	
 
@@ -205,6 +215,10 @@ Created By : Anushree.
 	*/
 	$(function(){
 		
+		//populating with Stored data in JSON object
+		populate('#registrationForm', $.parseJSON(data));
+		
+		
 		//functionalities for input fileds except reset and button
 		$("#registrationForm :input:not(:reset):not(:button)").on({
 			focus: function(){
@@ -214,20 +228,39 @@ Created By : Anushree.
 				$(this).css("background-color", "#ffffff");
 			},
 			change: function(){
+				$("span").html("");
 				regCheck(this);
 			}
 
 		});
 		
-		//delete a row on click of delete
-		$('#deleteButton').click(function(){
-			deleteRow(this);
+		/*
+	
+		
+		$('#studentTable').on('click', 'tbody tr td input[.btn .btn-danger]', function(){
+			$(this).closest('tr').remove();
 		});
 		
+		$('#studentTable').on('click', 'tbody tr td input[.btn .btn-warning]', function(){
+			$("#submitButton").attr('value', 'Update');
+		});
+		
+		
+		*/
+		
+		
 
+		
+		
+		
+		
+		//keeping i agree checked by default and submit enabled
+		$('#iAgree').attr('checked', true);
+		$('#submitButton').removeAttr('disabled');
+		
 		//to enable/disable submit on check/uncheck of i agree
 		$('#iAgree').on({
-			click: function(){
+			change: function(){
 				if($(this).is(':checked'))
 					$('#submitButton').removeAttr('disabled');
 				else
@@ -251,93 +284,3 @@ Created By : Anushree.
 		
 	});
 }(window.jQuery, window, document));
-
-/*
-function validateForm() {
-
-    var nameReg = /^[A-Za-z]+$/;
-    var emailReg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-	var alphaNumericReg = /^[a-z0-9]+$/i;
-	
-	//fetching form elements in an array
-	var formCollection = document.getElementById("registrationForm").elements;
-	var totalFields = formCollection.length;
-	
-    var fName = $('#firstName').val();
-    var mName = $('#middleName').val();
-	var lName = $('#lastName').val();
-	var dob = $('#dob').val();	
-	var email = $('#email').val();
-    var username = $('#username').val();
-    var pass1 = $('#password1').val();
-    var pass2 = $('#password2').val();
-
-    var inputVal = new Array(fName, mName, lName, dob, email, username, pass1, pass2);
-
-    var inputMessage = new Array("first name", "middle name", "last name", "date of birth", "email address", "username", "password", "password again");
-
-    $('.error').hide();
-
-    if(inputVal[0] == ""){
-        $('#messages').after('<span class="error"> Please enter your ' + inputMessage[0] + '</span>');	
-		return;
-    } 
-    else if(!nameReg.test(inputVal[0])){
-        $('#messages').after('<span class="error"> Letters only!</span>');
-		return false;
-    }
-
-	if( (inputVal[1] != "") && !nameReg.test(inputVal[1]) ){
-        $('#messages').after('<span class="error"> Letters only!</span>');
-		return false;
-    }
-
-    if(inputVal[2] == ""){
-        $('#messages').after('<span class="error"> Please enter your ' + inputMessage[2] + '</span>');
-		return false;
-    }
-	else if(!nameReg.test(inputVal[2])){
-        $('#messages').after('<span class="error"> Letters only!</span>');
-		return false;
-    }
-		
-	if(inputVal[3] == ""){
-        $('#messages').after('<span class="error"> Please enter your ' + inputMessage[3] + '</span>');
-		return false;
-    }
-		
-	if(inputVal[4] == ""){
-        $('#messages').after('<span class="error"> Please enter your ' + inputMessage[4] + '</span>');
-		return false;
-    }
-    else if(!emailReg.test(inputVal[4])){
-		$('#messages').after('<span class="error"> Please enter a valid ' + inputMessage[4] + '</span>');
-		return false;
-    }
-
-    if(inputVal[5] == ""){
-		$('#messages').after('<span class="error"> Please enter your ' + inputMessage[5] + '</span>');
-		return false;
-    } 
-    else if(!alphaNumericReg.test(inputVal[5])){
-        $('#messages').after('<span class="error"> Letters and Numbers only!</span>');
-		return false;
-    }
-
-    if(inputVal[6] == ""){
-        $('#messages').after('<span class="error"> Please enter your ' + inputMessage[6] + '</span>');
-		return false;
-    }
-		
-	if(inputVal[7] == ""){
-        $('#messages').after('<span class="error"> Please enter your ' + inputMessage[7] + '</span>');
-		return false;
-    }
-	else if(inputVal[6] != inputVal[7]){
-        $('#messages').after('<span class="error"> Password must be same!</span>');
-		return false;
-    }
-
-		
-}
-*/ 
