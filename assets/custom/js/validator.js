@@ -51,12 +51,12 @@ Created By : Anushree.
 		var row = table.insertRow(rowCount);
 	
 		//adding a row to the table
-		row.insertCell(0).innerHTML = usersArray[studentsNumber].username;
-		row.insertCell(1).innerHTML = usersArray[studentsNumber].firstName;
-		row.insertCell(2).innerHTML = usersArray[studentsNumber].lastName;
-		row.insertCell(3).innerHTML = usersArray[studentsNumber].dob;
-		row.insertCell(4).innerHTML = '<input type="button" class="btn btn-warning" name="updateButton" value="Update">';
-		row.insertCell(5).innerHTML = '<input type="button" class="btn btn-danger" name="deleteButton" value="Delete">';
+		row.insertCell(0).html(usersArray[studentsNumber].username);
+		row.insertCell(1).html(usersArray[studentsNumber].firstName);
+		row.insertCell(2).html(usersArray[studentsNumber].lastName);
+		row.insertCell(3).html(usersArray[studentsNumber].dob);
+		row.insertCell(4).html('<input type="button" class="btn btn-warning" name="updateButton" value="Update">');
+		row.insertCell(5).html('<input type="button" class="btn btn-danger" name="deleteButton" value="Delete">');
 	};
 	
 	/**
@@ -147,6 +147,7 @@ Created By : Anushree.
 		
 	};
 	
+	
 	/**
 	* Functionality: check the input for the desired input pattern
 	* @params: input object
@@ -189,7 +190,7 @@ Created By : Anushree.
 		}
 		else if( inputType == "password" && inputId === "password2")
 		{
-			if( $(this).prev().val() === inputValue)
+			if ($('#password1').val() !== $('#password2').val())
 			{
 				$('#messages').after('<span class="error"> Password must be same!</span>');
 				$(object).focus();
@@ -198,7 +199,11 @@ Created By : Anushree.
 		}
 	};
 	
-	
+	/**
+	* Functionality: this function is invoked when DOM is created and is used to populate form field in the beginning
+	* @params: null
+	* @return: null
+	*/
 	var populate = function(frm, data) {
 		$.each(data, function(key, value){
 			$('[name='+key+']', frm).val(value);
