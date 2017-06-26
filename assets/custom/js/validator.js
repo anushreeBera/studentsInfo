@@ -18,26 +18,7 @@ Created By : Anushree.
 	var usersArray = [];
 	var flag = 0;
 	var data = '{"firstName":"John", "middleName":"", "lastName":"Dox", "dob":"0011-11-11", "email":"john@mfs.com", "username":"johnd1", "password1":"qw", "password2":"qw"}';
-	
-	/**
-	* Functionality: to delete a row from the table
-	* @params: DOM button
-	* @return: null
-	*
-	var deleteRow = function(button) {
-		
-		//finding the row index of the button
-		index = arguments[0].parentNode.parentNode.rowIndex;
-		
-		//deleting the object from usersArray
-		usersArray.splice(index - 1, 1);
-		
-		//deleting the row entry from the table
-		table.deleteRow(index);
-	};
-	*/
-	
-	
+
 	
 	/**
 	* Functionality: to add a row to the table
@@ -51,13 +32,14 @@ Created By : Anushree.
 		var row = table.insertRow(rowCount);
 	
 		//adding a row to the table
-		row.insertCell(0).html(usersArray[studentsNumber].username);
-		row.insertCell(1).html(usersArray[studentsNumber].firstName);
-		row.insertCell(2).html(usersArray[studentsNumber].lastName);
-		row.insertCell(3).html(usersArray[studentsNumber].dob);
-		row.insertCell(4).html('<input type="button" class="btn btn-warning" name="updateButton" value="Update">');
-		row.insertCell(5).html('<input type="button" class="btn btn-danger" name="deleteButton" value="Delete">');
+		row.insertCell(0).innerHTML = usersArray[studentsNumber].username;
+		row.insertCell(1).innerHTML = usersArray[studentsNumber].firstName;
+		row.insertCell(2).innerHTML = usersArray[studentsNumber].lastName;
+		row.insertCell(3).innerHTML = usersArray[studentsNumber].dob;
+		row.insertCell(4).innerHTML = '<input type="button" class="btn btn-warning" name="updateButton" value="Update">';
+		row.insertCell(5).innerHTML = '<input type="button" class="btn btn-danger" name="deleteButton" value="Delete">';
 	};
+	
 	
 	/**
 	* Functionality: update student table to update the details of the students who have registered successfully
@@ -239,26 +221,6 @@ Created By : Anushree.
 
 		});
 		
-		/*
-	
-		
-		$('#studentTable').on('click', 'tbody tr td input[.btn .btn-danger]', function(){
-			$(this).closest('tr').remove();
-		});
-		
-		$('#studentTable').on('click', 'tbody tr td input[.btn .btn-warning]', function(){
-			$("#submitButton").attr('value', 'Update');
-		});
-		
-		
-		*/
-		
-		
-
-		
-		
-		
-		
 		//keeping i agree checked by default and submit enabled
 		$('#iAgree').attr('checked', true);
 		$('#submitButton').removeAttr('disabled');
@@ -283,7 +245,22 @@ Created By : Anushree.
 		//to clear error messages and disable submit button on click of reset
 		$('#resetButton').click(function(){
 			$("span").html("");
+			$("#submitButton").attr('value', 'Add');
 			$('#submitButton').attr('disabled', 'disabled');
+		});
+		
+		//deleting the table row on click of delete
+		$('#studentTable').on("click", 'input.btn.btn-danger', function(e){
+			e.preventDefault();
+			var row_index = $(this).parents('tr').index();
+			usersArray.splice(row_index - 1, 1);
+			$(this).parents('tr').remove();
+			//console.log(usersArray);
+		});
+		
+		//updating the button label of submit button to Update on click of update
+		$('#studentTable').on('click', 'input.btn.btn-warning', function(){
+			$("#submitButton").attr('value', 'Update');
 		});
 		
 		
