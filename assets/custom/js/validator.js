@@ -11,7 +11,7 @@ Created By : Anushree.
 * @params: null 
 * @return: null
 */
-(function($, window, document) {
+(function() {
 	
 	//private variables
 	var table = document.getElementById("studentTable");
@@ -19,6 +19,9 @@ Created By : Anushree.
 	var flag = 0;
 	var data = '{"firstName":"John", "middleName":"", "lastName":"Dox", "dob":"0011-11-11", "email":"john@mfs.com", "username":"johnd1", "password1":"qw", "password2":"qw"}';
 
+	var $submitButton = $('#submitButton');
+	var $iAgree = $('#iAgree');
+	var $username = $('#username');
 	
 	/**
 	* Functionality: this function is invoked when DOM is created and is used to populate form field in the beginning
@@ -136,8 +139,9 @@ Created By : Anushree.
 				return;
 			}
 		}
-		if(confirm('Are you sure you want to submit it?'))
-			updateStudentTable();
+		
+		//calling function to update table and array data
+		updateStudentTable();
 		
 	};
 	
@@ -149,45 +153,50 @@ Created By : Anushree.
 	*/
 	var regCheck = function(object){
 		
+		var $messages = $('#messages');
+		var $object = $(object);
+		
 		var alphaReg = /^[A-Za-z]+$/;
 		var emailReg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 		var alphaNumericReg = /^[a-z0-9]+$/i;
 		
 		
-		var inputType = $(object).attr('type');
-		var inputId = $(object).attr('id');
-		var inputValue = $(object).val();
+		var inputType = $object.attr('type');
+		var inputId = $object.attr('id');
+		var inputValue = $object.val();
+		
+		
 		
 		if( inputType === "text" && ((inputId !== "middleName") && (inputId !== "username")) && !alphaReg.test(inputValue) )
 		{
-			$('#messages').after('<span class="error"> Letters only!</span>');
-			$(object).focus();
+			$messages.after('<span class="error"> Letters only!</span>');
+			$object.focus();
 			return;
 		}
 		else if( inputId === "middleName" && inputValue !== "" && !alphaReg.test(inputValue) )
 		{
-			$('#messages').after('<span class="error"> Letters only!</span>');
-			$(object).focus();
+			$messages.after('<span class="error"> Letters only!</span>');
+			$object.focus();
 			return;
 		}
 		else if( inputId === "username" && !alphaNumericReg.test(inputValue) )
 		{
-			$('#messages').after('<span class="error"> Letters and Numbers only!</span>');
-			$(object).focus();
+			$messages.after('<span class="error"> Letters and Numbers only!</span>');
+			$object.focus();
 			return;
 		}
 		else if( inputType == "email" && !emailReg.test(inputValue) )
 		{
-			$('#messages').after('<span class="error"> Please enter a valid email address.</span>');
-			$(object).focus();
+			$messages.after('<span class="error"> Please enter a valid email address.</span>');
+			$object.focus();
 			return;
 		}
 		else if( inputType == "password" && inputId === "password2")
 		{
 			if ($('#password1').val() !== $('#password2').val())
 			{
-				$('#messages').after('<span class="error"> Password must be same!</span>');
-				$(object).focus();
+				$messages.after('<span class="error"> Password must be same!</span>');
+				$object.focus();
 				return;
 			}
 		}
@@ -217,7 +226,7 @@ Created By : Anushree.
 		flag = 1;
 		
 		//checking if the username is changed or not	
-		$('#submitButton').click(function(){
+		$submitButton.click(function(){
 			if(usersArray[index - 1].username === document.getElementById("username").value)
 			{
 				//storing the other form fields in usersArray
@@ -267,21 +276,21 @@ Created By : Anushree.
 		});
 		
 		//keeping i agree checked by default and submit enabled
-		$('#iAgree').attr('checked', true);
-		$('#submitButton').removeAttr('disabled');
+		$iAgree.attr('checked', true);
+		$submitButton.removeAttr('disabled');
 		
 		//to enable/disable submit on check/uncheck of i agree
 		$('#iAgree').on({
 			change: function(){
 				if($(this).is(':checked'))
-					$('#submitButton').removeAttr('disabled');
+					$submitButton.removeAttr('disabled');
 				else
-					$('#submitButton').attr('disabled', 'disabled');
+					$submitButton.attr('disabled', 'disabled');
 			}
 		});
 		
 		//to validate the form on click of submit
-		$('#submitButton').on({
+		$submitButton.on({
 			click: function(){
 				emptyCheck();   
 			}
@@ -290,30 +299,57 @@ Created By : Anushree.
 		//to clear error messages and disable submit button on click of reset
 		$('#resetButton').click(function(){
 			$("span").html("");
-			$('#iAgree').attr('checked', false);
-			$("#submitButton").attr('value', 'Add');
-			$('#submitButton').attr('disabled', 'disabled');
+			$iAgree.attr('checked', false);
+			$submitButton.attr('value', 'Add');
+			$submitButton.attr('disabled', 'disabled');
+			$username.removeAttr('disabled');
 		});
 		
 		//deleting the table row and data from usersArray[] on click of delete
 		$('#studentTable').on("click", 'input.btn.btn-danger', function(e){
-			e.preventDefault();
-			var row_index = $(this).parents('tr').index();
-			usersArray.splice(row_index - 1, 1);
-			$(this).parents('tr').remove();
 			
-			console.log(usersArray);
+			e.preventDefault();
+			
+			if(confirm('Are you sure you want to delete this entry?')){
+				
+				var rowIndex = $(this).parents('tr').index();
+				
+				//checking if the row to be deleted is in the form fields entry, if yes, the form is reset
+				var currentUsername = $(this).parents('tr').find('td').html();
+				if(currentUsername === document.getElementById("username").value)
+				{
+					$('#registrationForm').trigger("reset");
+					$submitButton.attr('value', 'Add');
+					$username.removeAttr('disabled');
+				}
+				//removing user object from usersArray
+				usersArray.splice(rowIndex - 1, 1);
+				
+				//removing entry from the table
+				$(this).parents('tr').remove();
+			
+			
+				console.log(usersArray);
+			}
+
 		});
 		
 		//updating the button label of submit button to Update on click of update
 		$('#studentTable').on('click', 'input.btn.btn-warning', function(){
-			var row_index = $(this).parents('tr').index();
-			$("#submitButton").attr('value', 'Update');
-			updateEntry(row_index);
+			
+			var rowIndex = $(this).parents('tr').index();
+			
+			$iAgree.attr('checked', true);
+			$submitButton.attr('value', 'Update');
+			$submitButton.removeAttr('disabled');
+			$username.attr('disabled', 'disabled');
+			
+			//function call to update the entry
+			updateEntry(rowIndex);
 			
 			console.log(usersArray);
 		});
 		
 		
 	});
-}(window.jQuery, window, document));
+})();
