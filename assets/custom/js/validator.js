@@ -21,6 +21,18 @@ Created By : Anushree.
 
 	
 	/**
+	* Functionality: this function is invoked when DOM is created and is used to populate form field in the beginning
+	* @params: null
+	* @return: null
+	*/
+	var populate = function(frm, data) {
+		$.each(data, function(key, value){
+			$('[name='+key+']', frm).val(value);
+		});
+	};
+	
+	
+	/**
 	* Functionality: to add a row to the table
 	* @params: null 
 	* @return: null
@@ -180,19 +192,52 @@ Created By : Anushree.
 			}
 		}
 	};
+
 	
 	/**
-	* Functionality: this function is invoked when DOM is created and is used to populate form field in the beginning
-	* @params: null
-	* @return: null
+	* Functionality: to add a row to the table
+	* @params: Number index  the index of the entry to be updated
+	* @return: String
 	*/
-	var populate = function(frm, data) {
-		$.each(data, function(key, value){
-			$('[name='+key+']', frm).val(value);
+	var updateEntry = function(index) {
+		
+		var form = document.forms["registrationForm"];
+		
+		//populating the form fields with the usersArray values
+		form.firstName.value = usersArray[index - 1].firstName;
+		form.middleName.value = usersArray[index - 1].middleName;
+		form.lastName.value = usersArray[index - 1].lastName;
+		form.dob.value = usersArray[index - 1].dob;	
+		form.email.value = usersArray[index - 1].email;
+		form.username.value = usersArray[index - 1].username;
+		form.password1.value = usersArray[index - 1].password1;
+		form.password2.value = usersArray[index - 1].password2;
+		
+		//setting global flag for update to true
+		flag = 1;
+		
+		//checking if the username is changed or not	
+		$('#submitButton').click(function(){
+			if(usersArray[index - 1].username === document.getElementById("username").value)
+			{
+				//storing the other form fields in usersArray
+				usersArray[index - 1].firstName = form.firstName.value;
+				usersArray[index - 1].middleName = form.middleName.value;
+				usersArray[index - 1].lastName = form.lastName.value;
+				usersArray[index - 1].dob = form.dob.value;
+				usersArray[index - 1].email = form.email.value;
+				usersArray[index - 1].username === document.getElementById("username").value;
+				usersArray[index - 1].password1 = form.password1.value;
+				usersArray[index - 1].password2 = form.password2.value;
+				
+				//updating the row of the table
+				table.rows[index].cells[0].innerHTML = usersArray[index - 1].username;
+				table.rows[index].cells[1].innerHTML = usersArray[index - 1].firstName;
+				table.rows[index].cells[2].innerHTML = usersArray[index - 1].lastName;
+				table.rows[index].cells[3].innerHTML = usersArray[index - 1].dob;
+			}	
 		});
 	};
-	
-	
 	
 
 	/**
@@ -245,22 +290,28 @@ Created By : Anushree.
 		//to clear error messages and disable submit button on click of reset
 		$('#resetButton').click(function(){
 			$("span").html("");
+			$('#iAgree').attr('checked', false);
 			$("#submitButton").attr('value', 'Add');
 			$('#submitButton').attr('disabled', 'disabled');
 		});
 		
-		//deleting the table row on click of delete
+		//deleting the table row and data from usersArray[] on click of delete
 		$('#studentTable').on("click", 'input.btn.btn-danger', function(e){
 			e.preventDefault();
 			var row_index = $(this).parents('tr').index();
 			usersArray.splice(row_index - 1, 1);
 			$(this).parents('tr').remove();
-			//console.log(usersArray);
+			
+			console.log(usersArray);
 		});
 		
 		//updating the button label of submit button to Update on click of update
 		$('#studentTable').on('click', 'input.btn.btn-warning', function(){
+			var row_index = $(this).parents('tr').index();
 			$("#submitButton").attr('value', 'Update');
+			updateEntry(row_index);
+			
+			console.log(usersArray);
 		});
 		
 		
