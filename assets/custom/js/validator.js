@@ -55,6 +55,27 @@ Created By : Anushree.
 		row.insertCell(5).innerHTML = '<input type="button" class="btn btn-danger" name="deleteButton" value="Delete">';
 	};
 	
+	/**
+	* Functionality: to check whether email is unique in database
+	* @params: null 
+	* @return: boolean
+	*/
+	var uniqueEmail = function() {
+		
+		//fetching current email from form field
+		var $currentEmail = $('#email').val();
+		
+		$.each(usersArray, function(){
+			$.each(this, function(key, value){
+				if(key === "email" && value === $currentEmail)
+				{
+					console.log(value);
+					alert('This email ID is already taken!');
+					return false;
+				}
+			});
+		});
+	};
 	
 	/**
 	* Functionality: update student table to update the details of the students who have registered successfully
@@ -111,19 +132,17 @@ Created By : Anushree.
 	*/
 	var emptyCheck = function(){
 
-		var fName = $('#firstName').val();
-		var mName = $('#middleName').val();
-		var lName = $('#lastName').val();
+		var firstName = $('#firstName').val();
+		var middleName = $('#middleName').val();
+		var lastName = $('#lastName').val();
 		var dob = $('#dob').val();	
 		var email = $('#email').val();
 		var username = $('#username').val();
-		var pass1 = $('#password1').val();
-		var pass2 = $('#password2').val();
+		var password1 = $('#password1').val();
+		var password2 = $('#password2').val();
 
-		var inputVal = new Array(fName, mName, lName, dob, email, username, pass1, pass2);
+		var inputVal = new Array(firstName, middleName, lastName, dob, email, username, password1, password2);
 
-		
-		
 		var inputMessage = new Array("first name", "middle name", "last name", "date of birth", "email address", "username", "password", "password again");
 		
 		$('.error').hide();
