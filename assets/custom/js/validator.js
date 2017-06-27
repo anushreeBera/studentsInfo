@@ -17,8 +17,40 @@ Created By : Anushree.
 	var table = document.getElementById("studentTable");
 	var usersArray = [];
 	var flag = 0;
-	var data = '{"firstName":"John", "middleName":"", "lastName":"Dox", "dob":"0011-11-11", "email":"john@mfs.com", "username":"johnd1", "password1":"qw", "password2":"qw"}';
-
+	var defaultData = [
+					{
+						"firstName":"John",
+						"middleName":"",
+						"lastName":"Dox",
+						"dob":"0011-11-11",
+						"email":"john@mfs.com",
+						"username":"johnd1",
+						"password1":"qw",
+						"password2":"qw"
+					},
+					{
+						"firstName":"Jacob",
+						"middleName":"Arthur",
+						"lastName":"Brown",
+						"dob":"0022-11-11",
+						"email":"jacobab@mfs.com",
+						"username":"jacobab1",
+						"password1":"123",
+						"password2":"123"
+					},
+					{
+						"firstName":"Annie",
+						"middleName":"A",
+						"lastName":"Annonymous",
+						"dob":"0022-10-01",
+						"email":"annieaa@mfs.com",
+						"username":"annieaa1",
+						"password1":"a",
+						"password2":"a"
+					}
+				]
+	
+	
 	var $submitButton = $('#submitButton');
 	var $iAgree = $('#iAgree');
 	var $username = $('#username');
@@ -230,6 +262,7 @@ Created By : Anushree.
 	var updateEntry = function(index) {
 		
 		var form = document.forms["registrationForm"];
+		var formFields = ['firstName', 'middleName', 'lastName', 'dob', 'email', 'username', 'password1', 'password2'];
 		
 		//populating the form fields with the usersArray values
 		form.firstName.value = usersArray[index - 1].firstName;
@@ -275,8 +308,16 @@ Created By : Anushree.
 	*/
 	$(function(){
 		
-		//populating with Stored data in JSON object
-		populate('#registrationForm', $.parseJSON(data));
+		
+		//Records are pushed to the table from an array of objects in local when window is loaded
+		$(window).on("load", function() {
+	
+			for(var iterator = 0; iterator < defaultData.length; iterator++) {
+				studentsNumber = usersArray.length;
+				usersArray.push(defaultData[iterator]);
+				addRow();
+			}
+		});
 		
 		
 		//functionalities for input fileds except reset and button
