@@ -34,7 +34,7 @@ caption{
 .required label{
     font-weight:bold;
 }
-.required label:after{
+.required label::after{
     color:red;
     content:'*';
     display:inline;
