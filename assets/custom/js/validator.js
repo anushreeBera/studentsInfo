@@ -16,7 +16,8 @@ Created By : Anushree.
 	//private variables
 	var table = document.getElementById("studentTable");
 	var usersArray = [];
-	var flag = 0;
+	var flagUsername = 0;
+	var flagEmail = 0;
 	var defaultData = [
 					{
 						"firstName":"John",
@@ -57,10 +58,10 @@ Created By : Anushree.
 	
 	/**
 	* Functionality: this function is invoked when DOM is created and is used to populate form field in the beginning
-	* @params: null
+	* @params: data
 	* @return: null
 	*/
-	var populate = function(frm, data) {
+	var populate = function(data) {
 		$.each(data, function(key, value){
 			$('[name='+key+']', frm).val(value);
 		});
@@ -96,7 +97,7 @@ Created By : Anushree.
 		
 		//fetching current email from form field
 		var $currentEmail = $('#email').val();
-		
+		console.log(usersArray);
 		$.each(usersArray, function(){
 			$.each(this, function(key, value){
 				if(key === "email" && value === $currentEmail)
@@ -107,6 +108,7 @@ Created By : Anushree.
 				}
 			});
 		});
+		return true;
 	};
 	
 	/**
@@ -117,20 +119,24 @@ Created By : Anushree.
 	var updateStudentTable = function() {
 		
 		studentsNumber = usersArray.length;
+
 	
 		//checking if the username already exists
 		if(studentsNumber != 0)
 		{
+			if(!uniqueEmail())
+				flagEmail = 1;
+			
 			for(var loopIterator = 0;loopIterator < studentsNumber;loopIterator++)
 			{
 				if(usersArray[loopIterator].username === document.getElementById("username").value)
 				{
-					if(flag == 0)
+					if(flagUsername == 0)
 						return alert("This Username is already taken.");
 					else
 					{
 						//resetting global update flag to false
-						flag = 0;
+						flagUsername = 0;
 						return alert("Updating existing user!");
 					}
 				}
@@ -138,7 +144,7 @@ Created By : Anushree.
 		}
 		
 		//add to the user array only if it is a new entry
-		if(flag == 0)
+		if(flagUsername == 0 && flagEmail == 0)
 		{
 			//catching form data in an array, userObj and pushing it in an array of objects, usersArray
 			var userObj = {}
@@ -275,11 +281,11 @@ Created By : Anushree.
 		form.password2.value = usersArray[index - 1].password2;
 		
 		//setting global flag for update to true
-		flag = 1;
+		flagUsername = 1;
 		
 		//checking if the username is changed or not	
 		$submitButton.click(function(){
-			if(usersArray[index - 1].username === document.getElementById("username").value)
+			if(usersArray[index - 1].username === document.getElementById("username").value && uniqueEmail() )
 			{
 				//storing the other form fields in usersArray
 				usersArray[index - 1].firstName = form.firstName.value;
@@ -310,14 +316,14 @@ Created By : Anushree.
 		
 		
 		//Records are pushed to the table from an array of objects in local when window is loaded
-		$(window).on("load", function() {
+		//$(window).on("load", function() {
 	
 			for(var iterator = 0; iterator < defaultData.length; iterator++) {
 				studentsNumber = usersArray.length;
 				usersArray.push(defaultData[iterator]);
 				addRow();
 			}
-		});
+		//});
 		
 		
 		//functionalities for input fileds except reset and button
@@ -340,7 +346,7 @@ Created By : Anushree.
 		$submitButton.removeAttr('disabled');
 		
 		//to enable/disable submit on check/uncheck of i agree
-		$('#iAgree').on({
+		$iAgree.on({
 			change: function(){
 				if($(this).is(':checked'))
 					$submitButton.removeAttr('disabled');
